@@ -1,0 +1,2 @@
+#!/bin/bash
+echo $(date) >> /tmp/_date_ && openssl mdc2 < /tmp/_date_ && rm /tmp/_date_
