@@ -2,7 +2,7 @@
 dd if=/dev/random of=passkey bs=1024 count=64 
 openssl genrsa -aes256 -out rsa_masterkey.priv -rand passkey -writerand nextpasskey -primes 4 4096
 openssl rsa -check -noout < rsa_masterkey.priv
-echo $(openssl rsa -pubout < rsa_masterkey.priv) > rsa_masterkey.pub
+echo $(openssl rsa -modulus -noout < rsa_masterkey.priv) > rsa_masterkey.pub
 echo """
     dd if=/dev/random of=passrndsrc bs=1024 count=256
     echo $(openssl sha1 -rand rsa_masterkey.pub < passrndsrc) >> passwords.txt
